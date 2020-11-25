@@ -1,0 +1,10 @@
+Notes in optimisation:
+	Accept Error : Too many open files 
+		Increase ulimit
+	MySQL Packets.go read connection reset by peer 
+		Either increase mysql max_connection
+			SET GLOBAL max_connections = 200
+			make sure to restart mysql server after changing
+		or decrease *sql.DB.SetMaxOpenConns(151)
+			Check max_connections by making query
+				SHOW VARIABLES LIKE 'max_connections'

@@ -1,0 +1,18 @@
+db, mock, err := sqlmock.New()
+if err != nil {
+    t.Fatalf("an error '%s' was not expected when opening a stub database connection", err)
+}
+defer db.Close()
+
+rows := sqlmock.NewRows([]string{"userID", "usern", "email", "pass", "phone", "nickname"}).
+    AddRow(1, "sampleUsername", "sample@someDomain.com", "$2a$08$79S7a/4aJKY97/dwfKHFr.H1zmipI3UplmagNpZS3gAJRHe4rPV/q", "0123456789", "sample")
+mock.ExpectQuery("SELECT pass FROM user_table WHERE usern = \"sampleUsername\"").WillReturnRows(rows)
+
+
+rows := sqlmock.NewRows([]string{"userID", "usern", "email", "pass", "phone", "nickname"}).
+    AddRow(1, "sampleUsername", "sample@someDomain.com", "$2a$08$79S7a/4aJKY97/dwfKHFr.H1zmipI3UplmagNpZS3gAJRHe4rPV/q", "0123456789", "sample")
+mock.ExpectQuery("SELECT userID FROM user_table WHERE usern = \"sampleUsername\"").WillReturnRows(rows)
+
+rows = sqlmock.NewRows([]string{"userID", "usern", "email", "pass", "phone", "nickname"}).
+    AddRow(2, "username", "email@domain.com", "$2a$08$wznScE2S6zgFFYSkY4ATLudcUHpcnEK715cV4j0G6rFnRkomDPHXu", "0987654321", "nick")
+mock.ExpectQuery("SELECT userID FROM user_table WHERE usern = \"imsorry\"").WillReturnRows(rows)
