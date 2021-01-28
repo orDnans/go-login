@@ -1,7 +1,7 @@
 # go-login
-A sample Go server with login functionality using JWT and MySQL.
+A basic Go server with login functionality using JWT and MySQL.
 
-A sample Go server I made a while back, now sanitized from the sensitive information before.
+A basic Go server I made a while back, now sanitized from the sensitive information before.
 All sensitive information is put in a standard .env file
 
 Deploying:
